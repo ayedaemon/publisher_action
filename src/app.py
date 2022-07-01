@@ -1,22 +1,51 @@
 #!/usr/bin/python3
 
-from os import environ
+from os import environ, listdir
 from json import loads
-
 
 GITHUB_EVENT_PATH = environ.get('GITHUB_EVENT_PATH', './test/event.json')
 ACCESS_TOKEN = environ.get('ACCESS_TOKEN', 'dummy-token')
-
-print(GITHUB_EVENT_PATH, ACCESS_TOKEN)
-
+GITHUB_WORKSPACE = environ.get('GITHUB_WORKSPACE', '')
 
 
-with open(GITHUB_EVENT_PATH, "r") as event_file:
-    event = loads(event_file.read())
+def get_github_event(GITHUB_EVENT_PATH):
+    json_event = {}
+    try:
+        with open(GITHUB_EVENT_PATH, "r") as event_file:
+            string_event = event_file.read()
+            json_event = loads(string_event)
+    except Exception as ex:
+        pass
+    finally:
+        return json_event
+
+def get_filenames(extension):
+    output = listdir(GITHUB_WORKSPACE)
+    return output
 
 
-print(type(event), event)
+def push_medium(commits_info):
+    commit_sha = commits_info.get('id')
+    filename = get_filenames(".md")
+    print('Will be pushing --> ', filename)
 
-from pprint import pprint
 
-pprint(event)
+
+if __name__ == '__main__':
+
+    
+    KEYWORDS = {
+        '[push:medium]' : push_medium
+    }
+    
+    event = get_github_event(GITHUB_EVENT_PATH)
+    commits_info = event.get('commits',[{}])[0]
+
+    for key in KEYWORDS.keys():
+        if key in commits_info.get('message', ''):
+            print(f'Found {key} in commit. Executing {KEYWORDS[key].__name__}')
+            KEYWORDS[key].__call__(commits_info)
+            
+            
+    else:
+        print('Nothing found!!')

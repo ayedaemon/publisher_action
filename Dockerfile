@@ -1,7 +1,5 @@
 FROM python:3.7.2-alpine3.9
 RUN apk add --no-cache \
-    jq \
-    curl \
     git \
     python
 RUN apk add --no-cache python3-dev libstdc++ && \
@@ -12,5 +10,4 @@ RUN apk add --no-cache python3-dev libstdc++ && \
 
 WORKDIR /app
 ADD ./src /app
-RUN chmod +x /app/app.py
-ENTRYPOINT ["/app/app.py"]
+ENTRYPOINT ["/usr/bin/python3", "/app/app.py"]
