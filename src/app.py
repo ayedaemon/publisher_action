@@ -33,8 +33,6 @@ def push_medium(commits_info):
 
 
 if __name__ == '__main__':
-
-    
     KEYWORDS = {
         '[push:medium]' : push_medium
     }
