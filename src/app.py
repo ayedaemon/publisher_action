@@ -39,8 +39,6 @@ if __name__ == '__main__':
     for key in KEYWORDS.keys():
         if key in commits_info.get('message', ''):
             print(f'Found {key} in commit. Executing {KEYWORDS[key].__name__}')
-            KEYWORDS[key].__call__(commits_info)
-            
-            
+            KEYWORDS[key].__call__(commits_info)          
     else:
         print('Nothing found!!')
