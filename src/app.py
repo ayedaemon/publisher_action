@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from os import environ, listdir
+from os import listdir
 from json import loads
 from config import *
 
