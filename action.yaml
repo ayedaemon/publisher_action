@@ -1,0 +1,9 @@
+# action.yml
+name: 'hugo-publisher'
+description: 'Publishes hugo blogs to other sites' 
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'arrow-up-circle'
+  color: 'gray-dark'
