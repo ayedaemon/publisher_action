@@ -16,3 +16,7 @@ with open(GITHUB_EVENT_PATH, "r") as event_file:
 
 
 print(type(event), event)
+
+from pprint import pprint
+
+pprint(event)
