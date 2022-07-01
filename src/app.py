@@ -19,6 +19,7 @@ def get_github_event(GITHUB_EVENT_PATH):
     finally:
         return json_event
 
+
 def get_filenames(extension):
     output = listdir(GITHUB_WORKSPACE)
     return output
