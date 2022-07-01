@@ -12,5 +12,5 @@ RUN apk add --no-cache python3-dev libstdc++ && \
 
 WORKDIR /app
 ADD ./src /app
-RUN chmod +x app.py
-ENTRYPOINT ["./app.py"]
+RUN chmod +x /app/app.py
+ENTRYPOINT ["/app/app.py"]
